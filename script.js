@@ -1,19 +1,3 @@
-function scrollLeftTung() {
-  console.log("yessmam");
-  document.getElementById('scrollable').scrollBy({
-    left: -450,
-    behavior: 'smooth'
-  });
-}
-
-function scrollRight() {
-  console.log("yessir");
-  document.getElementById('scrollable').scrollBy({
-    left: 450, // ➡ scroll right = positive
-    behavior: 'smooth'
-  });
-}
-
 window.addEventListener('DOMContentLoaded', () => {
   const items = document.querySelectorAll('.grid-item');
 

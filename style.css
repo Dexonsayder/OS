@@ -12,25 +12,10 @@
 
 body{
     background-color: #20201F; 
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-  background: radial-gradient(
-    200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.1),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
-}
 
 body.glow::before {
   opacity: 1;
@@ -114,18 +99,17 @@ body.glow::before {
   row-gap: 5rem;
   padding: 10px;
   margin-top: 5rem; 
+    margin-left: 10px;
+  margin-right: 10px;
 }
 
 .grid-item {
   background-color: #dddddd2a;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   height: 7rem;
   border-radius: 7px;
   font-size: 1.5rem;
-  animation: appear 5s linear;
-  animation: timeline view();
-  animation-range: entry 0 cover 40%;
   opacity: 0;
   transform: translateX(-100px) scale(1);
   transition: transform 0.5s ease, opacity 0.5s ease;
@@ -134,12 +118,7 @@ body.glow::before {
   transition: transform 0.3s ease;
   position: relative;
   overflow: hidden;
-}
 
-.grid-item:hover {
-  transform: translateX(0) scale(1.1);
-  z-index: 0;
-  opacity: 1;
 }
 
 .grid-item.animate {
@@ -157,9 +136,9 @@ body.glow::before {
   border-radius: inherit;
   pointer-events: none;
   background: radial-gradient(
-    450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.2),
-    transparent 60%
+    10000px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 36, 36, 0.911),
+    transparent 100%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -169,3 +148,4 @@ body.glow::before {
 .grid-item:hover::before {
   opacity: 1;
 }
+
