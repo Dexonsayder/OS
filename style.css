@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin:1px;
+    padding:0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+body{
+    background-color: #20201F; 
+}
+
+.title {
+    text-align: center;
+    color: whitesmoke;
+    margin-top: 50px;
+    font-size: clamp(1rem, calc(1.5vw + 0.5rem), 3rem);
+}
+
+.scroll-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 5rem;
+}
+
+.wrapper {
+  max-height: 20rem;
+  height: 20rem;
+  border: 1px solid #ddd;
+  display: flex;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  max-width: 120rem; 
+  
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  min-width: 170px;
+  height: 20rem;
+  line-height: 20rem;
+  text-align: center;
+  background-color: #ddd;
+  margin-right: 2px;
+}
+
+.scroll-button {
+  background-color: #00000034;
+  border: 1px solid #00000059;
+  height: 20rem;
+  width: 5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.scroll-button.left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.scroll-button.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.grid-container {
+  display: grid;
+  top: 5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  row-gap: 5rem;
+  padding: 10px;
+  margin-top: 5rem; 
+}
+
+.grid-item {
+  background-color: #ddd;
+  text-align: center;
+  padding: 20px;
+  height: 7rem;
+  font-size: 1.5rem;
+  animation: appear 5s linear;
+  animation: timeline view();
+  animation-range: entry 0 cover 40%;
+  opacity: 0;
+  transform: translateX(-100px) scale(1);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  flex: 1;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.grid-item:hover {
+  transform: translateX(0) scale(1.1);
+  z-index: 2;
+}
+
+.grid-item.animate {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
