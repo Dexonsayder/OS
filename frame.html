@@ -1,117 +1,84 @@
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Online Library</title>
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            
-            <h1 class="title">
-           Welcome to the Online Library    
-            </h1>
+<!DOCTYPE html>
+<html>
 
-<div class="scroll-container relative w-full max-w-screen-xl mx-auto my-10">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<button class="scroll-button left absolute left-0 top-1/2 transform -translate-y-1/2" onclick="scrollLeft()">
-    &#8592;
-</button>
+<body>
 
-<div class="wrapper" id="scrollable">
-    <div class="item">box-1</div>
-    <div class="item">box-2</div>
-    <div class="item">box-3</div>
-    <div class="item">box-4</div>
-    <div class="item">box-5</div>
-    <div class="item">box-6</div>
-    <div class="item">box-1</div>
-    <div class="item">box-2</div>
-    <div class="item">box-3</div>
-    <div class="item">box-4</div>
-    <div class="item">box-5</div>
-    <div class="item">box-6</div>
-    <div class="item">box-7</div>
-    <div class="item">box-1</div>
-    <div class="item">box-2</div>
-    <div class="item">box-3</div>
-    <div class="item">box-4</div>
-    <div class="item">box-5</div>
-    <div class="item">box-6</div>
-    <div class="item">box-7</div>
-</div>
+    <h1 class="title">
+        Welcome to the Online Library
+    </h1>
 
-<button class="scroll-button right absolute right-0 top-1/2 transform -translate-y-1/2" onclick="scrollRight()">
-    &#8594;</button>
-</div>
-<!--
-<div class="scroll-container relative w-full max-w-screen-xl mx-auto my-10">
+    <div class="scroll-container relative w-full max-w-screen-xl mx-auto my-10">
 
-<button class="scroll-button2 left absolute left-0 top-1/2 transform -translate-y-1/2" onclick="scrollLeft2()">
-    &#8592;
-</button>
+        <button class="scroll-button left absolute left-0 top-1/2 transform -translate-y-1/2" onclick="scrollLeft()">&#8592;</button>
 
-<div class="wrapper" id="scrollable">
-    <div class="item">box-1</div>
-    <div class="item">box-2</div>
-    <div class="item">box-3</div>
-    <div class="item">box-4</div>
-    <div class="item">box-5</div>
-    <div class="item">box-6</div>
-    <div class="item">box-1</div>
-    <div class="item">box-2</div>
-    <div class="item">box-3</div>
-    <div class="item">box-4</div>
-    <div class="item">box-5</div>
-    <div class="item">box-6</div>
-    <div class="item">box-7</div>
-    <div class="item">box-1</div>
-    <div class="item">box-2</div>
-    <div class="item">box-3</div>
-    <div class="item">box-4</div>
-    <div class="item">box-5</div>
-    <div class="item">box-6</div>
-    <div class="item">box-7</div>
-</div>
+        <div class="wrapper" id="scrollable">
+            <div class="item">box-1</div>
+            <div class="item">box-2</div>
+            <div class="item">box-3</div>
+            <div class="item">box-4</div>
+            <div class="item">box-5</div>
+            <div class="item">box-6</div>
+            <div class="item">box-7</div>
+            <div class="item">box-8</div>
+            <div class="item">box-9</div>
+            <div class="item">box-10</div>
+            <div class="item">box-11</div>
+            <div class="item">box-12</div>
+            <div class="item">box-13</div>
+            <div class="item">box-14</div>
+            <div class="item">box-15</div>
+            <div class="item">box-16</div>
+            <div class="item">box-17</div>
+            <div class="item">box-18</div>
+            <div class="item">box-19</div>
+            <div class="item">box-20</div>
+        </div>
 
-                                
-<button class="scroll-button2 right absolute right-0 top-1/2 transform -translate-y-1/2" onclick="scrollRight2()">&#8594;</button>
-</div>
--->
-<div class="grid-container">
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-</div>
-<script src="script.js"></script>
-        </body>
-      </html>
+        <button class="scroll-button right absolute right-0 top-1/2 transform -translate-y-1/2" onclick="scrollRight()">&#8594;</button>
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
