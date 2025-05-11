@@ -1,7 +1,7 @@
-function scrollLeft() {
+function scrollLeftTung() {
   console.log("yessmam");
   document.getElementById('scrollable').scrollBy({
-    right: 450,
+    left: -450,
     behavior: 'smooth'
   });
 }
