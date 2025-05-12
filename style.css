@@ -172,7 +172,11 @@ body::before {
   position:relative;
   margin-top: 90px;
   margin-left: 10px;
-  font-size: 45px;
+  font-size: clamp(0.75rem, 1.5vw, 1.5rem);
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .grid-item:hover .grid-content {
