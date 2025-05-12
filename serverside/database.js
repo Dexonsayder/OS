@@ -1,27 +1,33 @@
-import mysql from 'mysql';
+import mysql from 'mysql2/promise';
 
 export class Database {
   connection = null;
 
   constructor() {
-    this.connection = mysql.createConnection({
+    this.connect()
+      .then(() => {
+        console.log('Database connected');
+
+        this.initializeTables();
+      })
+      .catch((error) => {
+        console.error('Error connecting to database: ' + error.stack);
+      });
+  }
+
+  async connect() {
+    this.connection = await mysql.createConnection({
       host: 'localhost',
       user: 'pagerep',
       password: 'pagerep',
       database: 'page_replacement'
     });
 
-    this.connection.connect(err => {
-      if (err) {
-        return console.error('Connection error: ' + err.stack);
-      }
-
-      console.log('Connected as ID ' + this.connection.threadId);
-      this.initializeTables();
-    });
+    console.log('Connected as ID ' + this.connection.threadId);
   }
 
-  initializeTables() {
+
+  async initializeTables() {
     const bookTableStatement = `
       CREATE TABLE IF NOT EXISTS books (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,36 +42,30 @@ export class Database {
         FOREIGN KEY (id) REFERENCES books(id)
       );`;
 
-    this.connection.query(bookTableStatement, (error, results) => {
-      if (error) {
-        console.error('Error creating table: ' + error.stack);
-      } else {
-        console.log('Books table initialized');
-      }
-    });
+    try {
+      await this.connection.query(bookTableStatement);
+      console.log('Books table initialized');
 
-    this.connection.query(recentsTableStatement, (error, results) => {
-      if (error) {
-        console.error('Error creating table: ' + error.stack);
-      } else {
-        console.log('Recents table initialized');
-      }
-    });
+      await this.connection.query(recentsTableStatement);
+      console.log('Recents table initialized');
+    } catch (error) {
+      console.error('Error creating tables: ' + error.stack);
+    }
   }
 
-    getBooks() {
-      return new Promise((resolve, reject) => {
-        this.connection.query('SELECT * FROM books', (error, results) => {
-          if (error) {
-            return reject(error);
-          }
-          resolve(results);
-        });
-      });
-    }
+  async getBooks() {
+    try {
+      let [books] = await this.connection.query('SELECT * FROM books');
 
-    getRecents() {
-      const recentsQuery = `
+      return books;
+    } catch (error) {
+      console.error('Error fetching books: ' + error.stack);
+      return [];
+    }
+  }
+
+  async getRecents() {
+    const recentsQuery = `
         SELECT
           books.id,
           books.title,
@@ -75,16 +75,90 @@ export class Database {
         JOIN recents
           ON books.id = recents.id
       `;
-    
-    
-      return new Promise((resolve, reject) => {
-        this.connection.query(recentsQuery, (error, results) => {
-          if (error) {
-            return reject(error);
-          }
-          resolve(results);
-        });
-      });
+
+    try {
+      let [recents] = await this.connection.query(recentsQuery);
+
+      return recents;
     }
+    catch (error) {
+      console.error('Error fetching recents: ' + error.stack);
+      return [];
+    }
+  }
+
+  async markAsRecent(id) {
+    const checkIfExists = `
+        SELECT COUNT(*) AS count
+        FROM recents
+        WHERE id = ?
+      `;
+
+    const addToRecents = `
+        INSERT INTO recents (id)
+        VALUES (?)
+      `;
+
+    const updateAges = `
+        UPDATE recents
+        SET age = age + 1
+      `;
+
+    const checkCount = `
+        SELECT COUNT(*) AS count
+        FROM recents
+      `;
+    
+    const getOldest = `
+        SELECT id
+        FROM recents
+        ORDER BY age DESC
+        LIMIT 1
+      `;
+
+    const removeOldest = `
+        DELETE FROM recents
+        WHERE id = ?
+      `;
+
+    /*
+      Outline:
+        - Check if in recents, if is, exit
+        - Check if full, if is, remove oldest
+        - Add to recents
+        - Increment ages
+    */
+    
+    try {
+      const [checkResult] = await this.connection.execute(checkIfExists, [id]);
+      console.log('Check result:', checkResult[0].count);
+
+      if (checkResult[0].count > 0) {
+        console.log('Already in recents');
+        return;
+      }
+
+      const [countResult] = await this.connection.query(checkCount);
+      const maxRecents = 3;
+
+      console.log('Count result:', countResult[0].count);
+
+      if (countResult[0].count >= maxRecents) {
+        const [oldestResult] = await this.connection.query(getOldest);
+        const oldestId = oldestResult[0].id;
+
+        await this.connection.execute(removeOldest, [oldestId]);
+        console.log(`Removed oldest entry with id "${oldestId}" from recents`);
+      }
+
+      await this.connection.query(addToRecents, [id]);
+      console.log(`Added id "${id}" to recents`);
+
+      await this.connection.query(updateAges);
+      console.log('Incremented ages of recents');
+    } catch (error) {
+      console.error('Error marking as recent: ' + error.stack);
+    }
+  }
 }
 

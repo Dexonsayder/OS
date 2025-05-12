@@ -18,6 +18,16 @@ app.get('/recents', (req, res) => {
     .catch(error => res.status(500).json({ error: error.message }));
 });
 
+app.get('/books/:id', (req, res) => {
+  const id = req.params.id;
+
+  console.log(`Fetching book with ID: ${id}`);
+
+  database.markAsRecent(id)
+    .then(() => res.status(200).json({ message: 'Book marked as recent' }))
+    .catch(error => res.status(500).json({ error: error.message }));
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
