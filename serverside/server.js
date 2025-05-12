@@ -6,6 +6,8 @@ import { Database } from './database.js';
 
 const database = new Database();
 
+//http://localhost:3000/
+
 app.get('/books', (req, res) => {
   database.getBooks()
     .then(results => res.json(results))

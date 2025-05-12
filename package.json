@@ -1,5 +1,8 @@
 {
   "type": "module",
+  "scripts": {
+    "start": "node serverside/server.js"
+  },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.6",
     "express": "^5.1.0",
