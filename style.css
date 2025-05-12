@@ -137,8 +137,8 @@ body.glow::before {
   pointer-events: none;
   background: radial-gradient(
     10000px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 36, 36, 0.911),
-    transparent 100%
+    rgba(255, 36, 36, 0.774),
+    transparent 10%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -149,3 +149,14 @@ body.glow::before {
   opacity: 1;
 }
 
+.grid-content{
+  color: #fff;
+}
+
+.grid-item:hover .grid-content {
+  color: #000000;
+  transition: 0.4s ease;
+  font-weight: bold;
+  transform: scale(1.02);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
