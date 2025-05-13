@@ -1,10 +1,14 @@
 import express from 'express';
+import cors from 'cors';
+
 const app = express();
 const port = 3000;
 
 import { Database } from './database.js';
 
 const database = new Database();
+
+app.use(cors());
 
 //http://localhost:3000/
 
