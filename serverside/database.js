@@ -31,10 +31,11 @@ export class Database {
 
   async initializeTables() {
     const bookTableStatement = `
-      CREATE TABLE IF NOT EXISTS books (
+        CREATE TABLE IF NOT EXISTS books (
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
-        url VARCHAR(255) NOT NULL
+        url VARCHAR(255) NOT NULL,
+        image_url VARCHAR(255)
       );`;
 
     const recentsTableStatement = `
@@ -72,6 +73,7 @@ export class Database {
           books.id,
           books.title,
           books.url,
+          books.image_url,
           recents.age
         FROM books
         JOIN recents

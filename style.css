@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 * {
   margin: 1px;
   padding: 0px;
@@ -19,11 +19,13 @@
 body {
   margin-left: 100px;
   margin-right: 100px;
-  background: linear-gradient(135deg, #0e0d0d, #050505, #1d1d1d);
+  background: linear-gradient(135deg, #292626, #050505, #424141);
   background-size: 400% 400%;
   animation: metallicMove 10s ease infinite;
   color: #5f5f5f;
+  font-size: clamp(1rem, 1.5vw, 1rem);
 }
+
 
 @keyframes metallicMove {
   0% {
@@ -83,53 +85,81 @@ body::before {
   margin-top: 5rem;
 }
 
-.recents-container{
+.wrapper {
   max-height: 20rem;
   height: 20rem;
   display: flex;
   overflow-x: auto;
   -ms-overflow-style: none;
-  max-width: 120px;
+  max-width: 120rem;
   flex-wrap: nowrap;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.trending-container{
-  max-height: 20rem;
-  height: 20rem;
   display: flex;
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  max-width: 120px;
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  justify-content: center;
+  gap: 20px;
   overflow: hidden;
-  text-overflow: ellipsis;
-}
 
-.wrapper::-webkit-scrollbar {
-  display: none;
+  
 }
 
 .item {
+  position: absolute;
   min-width: 170px;
   height: 19rem;
+  max-width: 170px;
   line-height: 19rem;
   text-align: center;
   background-color: #ddd;
   margin-right: 2px;
-  margin-top: 7px;
+  margin-left: 2px;
+  margin-top: 17px;
   border-radius: 7px;
-  opacity: 0.7;
-   white-space: nowrap;
+  opacity: 0;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+
+.item-content {
+  position: relative;
+  inset: 0; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 7px;
+  color: white;
+  z-index: 1;
+  opacity: 1;
+  background: rgba(15, 15, 15, 0.89);
+  text-align: center;
+  gap: 50px;
+}
+
 .item:hover {
   opacity: 1;
+}
+
+
+.recents-item-cover{
+  position: absolute;
+  top: 0;
+  left: -10;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  top: -30px;
+}
+
+.item-title{
+  position: relative;
+  bottom: -120px;
+  left: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .grid-container {
@@ -157,7 +187,7 @@ body::before {
   transition: transform 0.5s ease, opacity 0.5s ease;
   flex: 1;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.6s ease-in-out;
   position: relative;
   overflow: hidden;
 }
@@ -176,16 +206,35 @@ body::before {
   width: 100%;
   border-radius: inherit;
   pointer-events: none;
-  background: radial-gradient(10000px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(255, 36, 36, 0.774),
-      transparent 10%);
   opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
+  transition: opacity 0.6s ease;
+  z-index: 1;
 }
 
 .grid-item:hover::before {
+  opacity: 0;
+}
+
+
+.grid-item-cover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 1;
+  border-radius: 7px;
+}
+
+.grid-item:hover .grid-item-cover {
+  opacity: 0.5;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.grid-item:hover .grid-content {
+  opacity: 1;
+  transition: transform 0.6s
 }
 
 .grid-content {
@@ -193,17 +242,18 @@ body::before {
   position: relative;
   margin-top: 90px;
   margin-left: 10px;
-  font-size: clamp(0.75rem, 1.5vw, 1.5rem);
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
 .grid-item:hover .grid-content {
-  color: #000000;
+  color: #ffffff;
   transition: 0.4s ease;
   font-weight: bold;
   transform: scale(1.02);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  text-shadow: 1px 1px 3px rgba(0, 10, 2, 1);
 }

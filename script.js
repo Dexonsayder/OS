@@ -96,6 +96,7 @@ async function retrieveBooks() {
       bookElement.classList.add('grid-item');
 
       bookElement.innerHTML = `
+        <img src="${book.image_url}" alt="${book.title}" class="grid-item-cover"/>
         <p class="grid-content">${book.title}</p>
       `;
 
@@ -126,8 +127,12 @@ async function retrieveRecents() {
     data.forEach(recent => {
       const recentElement = document.createElement('div');
       recentElement.classList.add('item');
+      recentElement.classList.add('item-content');
 
-      recentElement.innerHTML = recent.title;
+      recentElement.innerHTML = `
+        <img src="${recent.image_url}" alt="${recent.title}" class="recents-item-cover"/>
+        <p class="item-title">${recent.title}</p>
+      `;;
 
       setupHyperlink(recentElement, recent.url, recent.id);
 
