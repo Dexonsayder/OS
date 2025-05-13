@@ -83,7 +83,7 @@ body::before {
   margin-top: 5rem;
 }
 
-.recents-container-wrapper {
+.recents-container{
   max-height: 20rem;
   height: 20rem;
   display: flex;
@@ -91,9 +91,12 @@ body::before {
   -ms-overflow-style: none;
   max-width: 120px;
   flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.trending-container-{
+.trending-container{
   max-height: 20rem;
   height: 20rem;
   display: flex;
@@ -101,6 +104,9 @@ body::before {
   -ms-overflow-style: none;
   max-width: 120px;
   flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wrapper::-webkit-scrollbar {
