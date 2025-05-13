@@ -2,6 +2,7 @@
 window.addEventListener('DOMContentLoaded',async () => {
   try {
     await retrieveBooks();
+    await retrieveRecents();
   } catch (error) {
     console.error('Error retrieving books:', error);
   }
@@ -56,15 +57,12 @@ document.addEventListener('mouseleave', () => {
 });
 /*-------------------------------------------------------------------------This Section is on the functionality and effects of the website------------------------------------------------------*/
 
-function setupHyperlink(element, url) {
+function setupHyperlink(element, url, id) {
   element.addEventListener('click', async () => {
-    const bookId = book.id;
-    const bookUrl = book.url;
-
     try {
-      window.open(bookUrl, '_blank');
+      window.open(url, '_blank');
 
-      const markResponse = await fetch(`http://localhost:3000/books/${bookId}`);
+      const markResponse = await fetch(`http://localhost:3000/books/${id}`);
 
       if (!markResponse.ok) {
         throw new Error('Network response was not ok');
@@ -99,7 +97,7 @@ async function retrieveBooks() {
         <p class="grid-content">${book.title}</p>
       `;
 
-      setupHyperlink(bookElement, book.url);
+      setupHyperlink(bookElement, book.url, book.id);
 
       gridContainer.appendChild(bookElement);
     });
@@ -127,7 +125,7 @@ async function retrieveRecents() {
 
       recentElement.innerHTML = recent.title;
 
-      setupHyperlink(recentElement, recent.url);
+      setupHyperlink(recentElement, recent.url, recent.id);
 
       recentsContainer.appendChild(recentElement);
     });
