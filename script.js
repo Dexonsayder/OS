@@ -70,6 +70,8 @@ function setupHyperlink(element, url, id) {
 
       const markData = await markResponse.json();
       console.log('Book marked as recent:', markData);
+
+      await retrieveRecents();
     } catch (error) {
       console.error('Error marking book as recent:', error);
     }
@@ -118,6 +120,8 @@ async function retrieveRecents() {
 
     const data = await response.json();
     const recentsContainer = document.querySelector('.recents-container');
+
+    recentsContainer.innerHTML = ''; // Clear previous recents
 
     data.forEach(recent => {
       const recentElement = document.createElement('div');
