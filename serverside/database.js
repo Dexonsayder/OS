@@ -3,6 +3,8 @@ import mysql from 'mysql2/promise';
 export class Database {
   connection = null;
 
+  maxRecents = 5;
+
   constructor() {
     this.connect()
       .then(() => {
@@ -146,11 +148,11 @@ export class Database {
         console.log('Already in recents, renewing listing');
       } else {
         const [countResult] = await this.connection.query(checkCount);
-        const maxRecents = 3;
+
 
         console.log('Count result:', countResult[0].count);
 
-        if (countResult[0].count >= maxRecents) {
+        if (countResult[0].count >= this.maxRecents) {
           const [oldestResult] = await this.connection.query(getOldest);
           const oldestId = oldestResult[0].id;
 
