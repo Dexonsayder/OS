@@ -79,7 +79,7 @@ function setupHyperlink(element, url, id) {
 }
 
 async function retrieveBooks() {
-  const url = "http://localhost:3000/books";
+  const url = "http://127.0.0.1:3000/books";
 
   try {
     const response = await fetch(url);

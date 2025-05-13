@@ -107,6 +107,9 @@ body::before {
   margin-top: 7px;
   border-radius: 7px;
   opacity: 0.7;
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item:hover {
