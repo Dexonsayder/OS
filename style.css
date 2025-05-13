@@ -83,13 +83,23 @@ body::before {
   margin-top: 5rem;
 }
 
-.wrapper {
+.recents-container-wrapper {
   max-height: 20rem;
   height: 20rem;
   display: flex;
   overflow-x: auto;
   -ms-overflow-style: none;
-  max-width: 120rem;
+  max-width: 120px;
+  flex-wrap: nowrap;
+}
+
+.trending-container-{
+  max-height: 20rem;
+  height: 20rem;
+  display: flex;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  max-width: 120px;
   flex-wrap: nowrap;
 }
 
