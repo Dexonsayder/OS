@@ -7,8 +7,9 @@ const port = 3000;
 import { Database } from './database.js';
 
 const database = new Database();
-
-app.use(cors());
+app.use(cors({
+  origin: ['http://127.0.0.1:5500', 'http://localhost:5500']
+}));
 
 //http://localhost:3000/
 
