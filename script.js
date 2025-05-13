@@ -56,6 +56,28 @@ document.addEventListener('mouseleave', () => {
 });
 /*-------------------------------------------------------------------------This Section is on the functionality and effects of the website------------------------------------------------------*/
 
+function setupHyperlink(element, url) {
+  element.addEventListener('click', async () => {
+    const bookId = book.id;
+    const bookUrl = book.url;
+
+    try {
+      window.open(bookUrl, '_blank');
+
+      const markResponse = await fetch(`http://localhost:3000/books/${bookId}`);
+
+      if (!markResponse.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const markData = await markResponse.json();
+      console.log('Book marked as recent:', markData);
+    } catch (error) {
+      console.error('Error marking book as recent:', error);
+    }
+  });
+}
+
 async function retrieveBooks() {
   const url = "http://localhost:3000/books";
 
@@ -77,29 +99,39 @@ async function retrieveBooks() {
         <p class="grid-content">${book.title}</p>
       `;
 
-      bookElement.addEventListener('click', async () => {
-        const bookId = book.id;
-        const bookUrl = book.url;
-
-        try {
-          window.open(bookUrl, '_blank');
-
-          const markResponse = await fetch(`http://localhost:3000/books/${bookId}`);
-
-          if (!markResponse.ok) {
-            throw new Error('Network response was not ok');
-          }
-
-          const markData = await markResponse.json();
-          console.log('Book marked as recent:', markData);
-        } catch (error) {
-          console.error('Error marking book as recent:', error);
-        }
-      });
+      setupHyperlink(bookElement, book.url);
 
       gridContainer.appendChild(bookElement);
     });
   } catch (error) {
     console.error('Error fetching books:', error);
+  }
+}
+
+async function retrieveRecents() {
+  const url = "http://localhost:3000/recents";
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    const recentsContainer = document.querySelector('.recents-container');
+
+    data.forEach(recent => {
+      const recentElement = document.createElement('div');
+      recentElement.classList.add('item');
+
+      recentElement.innerHTML = recent.title;
+
+      setupHyperlink(recentElement, recent.url);
+
+      recentsContainer.appendChild(recentElement);
+    });
+  } catch (error) {
+    console.error('Error fetching recents:', error);
   }
 }
