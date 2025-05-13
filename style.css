@@ -19,7 +19,7 @@
 body {
   margin-left: 100px;
   margin-right: 100px;
-  background: linear-gradient(135deg, #292626, #050505, #424141);
+  background: linear-gradient(135deg, #292626, #161616, #424141);
   background-size: 400% 400%;
   animation: metallicMove 10s ease infinite;
   color: #5f5f5f;
@@ -96,9 +96,7 @@ body::before {
   display: flex;
   justify-content: center;
   gap: 20px;
-  overflow: hidden;
-
-  
+  overflow: hidden;  
 }
 
 .item {
@@ -114,9 +112,7 @@ body::before {
   margin-top: 17px;
   border-radius: 7px;
   opacity: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
 }
 
 
@@ -159,7 +155,9 @@ body::before {
   left: 0px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  width: 100%;
+  text-align: center
 }
 
 .grid-container {
@@ -245,7 +243,7 @@ body::before {
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: break-word;
   opacity: 0;
   transition: opacity 0.6s ease;
 }
