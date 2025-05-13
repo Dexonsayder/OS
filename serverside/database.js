@@ -74,6 +74,7 @@ export class Database {
         FROM books
         JOIN recents
           ON books.id = recents.id
+        ORDER BY recents.age ASC
       `;
 
     try {
@@ -93,6 +94,12 @@ export class Database {
         FROM recents
         WHERE id = ?
       `;
+    
+    const renewListing = `
+        UPDATE recents
+        SET age = 0
+        WHERE id = ?
+    `;
 
     const addToRecents = `
         INSERT INTO recents (id)
@@ -134,25 +141,26 @@ export class Database {
       console.log('Check result:', checkResult[0].count);
 
       if (checkResult[0].count > 0) {
-        console.log('Already in recents');
-        return;
+        await this.connection.execute(renewListing, [id]);
+
+        console.log('Already in recents, renewing listing');
+      } else {
+        const [countResult] = await this.connection.query(checkCount);
+        const maxRecents = 3;
+
+        console.log('Count result:', countResult[0].count);
+
+        if (countResult[0].count >= maxRecents) {
+          const [oldestResult] = await this.connection.query(getOldest);
+          const oldestId = oldestResult[0].id;
+
+          await this.connection.execute(removeOldest, [oldestId]);
+          console.log(`Removed oldest entry with id "${oldestId}" from recents`);
+        }
+
+        await this.connection.query(addToRecents, [id]);
+        console.log(`Added id "${id}" to recents`);
       }
-
-      const [countResult] = await this.connection.query(checkCount);
-      const maxRecents = 3;
-
-      console.log('Count result:', countResult[0].count);
-
-      if (countResult[0].count >= maxRecents) {
-        const [oldestResult] = await this.connection.query(getOldest);
-        const oldestId = oldestResult[0].id;
-
-        await this.connection.execute(removeOldest, [oldestId]);
-        console.log(`Removed oldest entry with id "${oldestId}" from recents`);
-      }
-
-      await this.connection.query(addToRecents, [id]);
-      console.log(`Added id "${id}" to recents`);
 
       await this.connection.query(updateAges);
       console.log('Incremented ages of recents');

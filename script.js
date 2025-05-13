@@ -77,6 +77,26 @@ async function retrieveBooks() {
         <p class="grid-content">${book.title}</p>
       `;
 
+      bookElement.addEventListener('click', async () => {
+        const bookId = book.id;
+        const bookUrl = book.url;
+
+        try {
+          window.open(bookUrl, '_blank');
+
+          const markResponse = await fetch(`http://localhost:3000/books/${bookId}`);
+
+          if (!markResponse.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const markData = await markResponse.json();
+          console.log('Book marked as recent:', markData);
+        } catch (error) {
+          console.error('Error marking book as recent:', error);
+        }
+      });
+
       gridContainer.appendChild(bookElement);
     });
   } catch (error) {
